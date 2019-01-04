@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <fstream>
+#include <string.h>
 
 using namespace std;
 
@@ -49,4 +51,39 @@ class Map {
         }
         
     }
+
+    public: void loadMap(){
+
+        int j = 0;
+        
+        ifstream mapFile;
+        mapFile.open("maps/map1.mp");
+
+        if(mapFile.is_open()){
+
+            // cout << "Map loaded." << endl; 
+
+            string line;
+
+            getline(mapFile,line);
+
+            this->length = stoi(line);
+
+            getline(mapFile,line);
+
+            this->height = stoi(line);
+
+            this->create(this->length,this->height);
+
+            while(getline(mapFile,line)){
+                for(int i = 0 ; i < line.length() ; i ++){
+                    this->map[i][j] = (int)line.at(i);
+                }
+                j++;
+            }
+
+            mapFile.close();
+        }
+    }
+
 };
